@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Vinyl Haven | Login</title>
+<title>Vinyl Haven | Cart</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,6 @@
 
 <div class="container">
 
-<div class="container">
 <nav class="sidebar">
   <a href="index.html">Home</a>
   <a href="product.html">Product Catalog</a>
@@ -22,37 +21,42 @@
   <a href="about.html">About</a>
   <a href="contact.html">Contact Us</a>
   <a href="profile.html">Profile</a>
-  <a href="login.html">Login</a>
 </nav>
 
-<main class = "content">
-<h2> Your Cart</h2>
+<main class="content">
+<h2>Your Cart</h2>
 
-<div class = "cart-box">
+<div class="cart-box">
 
-    <div class = "cart-item">
-        <span> Ariana Grande - Eternal Sunshine</span>
-        <span> ₱2,300</span>
+    <div class="cart-item">
+        <span>Ariana Grande – Eternal Sunshine</span>
+        <span>₱2,300</span>
     </div>
 
-    <div class = "cart-item">
-        <span> Laufey - Bewitched</span>
-        <span> ₱2,100</span>
+    <div class="cart-item">
+        <span>Laufey – Bewitched</span>
+        <span>₱2,100</span>
     </div>
 
-    <div class = "total">
-        <strong> Total: </strong> ₱4,400
+    <div class="total">
+        <strong>Total:</strong> ₱4,400
     </div>
 
-    <button class = "checkout-btn" onclick="checkout()">Checkout</button>
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
 </div>
+
 </main>
 </div>
-</div>
+
 <footer class="footer">
 <p>© 2026 Vinyl Haven</p>
 </footer>
-<script src="script.js"></script>
+
+<script>
+function checkout() {
+    window.location.href = "payment.html";
+}
+</script>
 
 </body>
 </html>
