@@ -105,3 +105,53 @@ cursor: pointer;
     padding: 25px;
     border-radius: 15px;
 }
+/* payment */
+.payment-box {
+  max-width: 600px;
+  background: rgba(255,255,255,0.1);
+  padding: 25px;
+  border-radius: 16px;
+}
+
+.payment-box h3 {
+  margin-top: 20px;
+}
+
+.option {
+  margin: 10px 0;
+}
+
+.confirm-btn {
+  margin-top: 25px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* confirmation */
+.confirm-box {
+  max-width: 600px;
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  margin: 20px auto;
+  color: #fff;
+}
+.confirm-box ul {
+  text-align: left;
+  margin-top: 10px;
+}
+.confirm-box a {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #fff;
+  background: #111;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
