@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Vinyl Haven | Sign Up</title>
+<title>Vinyl Haven | Payment</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,53 +14,47 @@
 
 <div class="container">
 
-<div class="container">
 <nav class="sidebar">
   <a href="index.html">Home</a>
   <a href="product.html">Product Catalog</a>
   <a href="cart.html">Your Cart</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact Us</a>
   <a href="profile.html">Profile</a>
-  <a href="login.html">Login</a>
 </nav>
 
 <main class="content">
-<h2>Create Account</h2>
+<h2>Payment & Delivery</h2>
 
-<form class="contact-form">
-<label>First Name</label>
-<input type="text" placeholder="Juan">
+<div class="payment-box">
 
-<label>Last Name</label>
-<input type="text" placeholder="Dela Cruz">
+<h3>Payment Method</h3>
+<div class="option">
+  <input type="radio" name="payment" value="Cash on Delivery" checked> Cash on Delivery
+</div>
+<div class="option">
+  <input type="radio" name="payment" value="GCash"> GCash
+</div>
+<div class="option">
+  <input type="radio" name="payment" value="Credit/Debit Card"> Credit / Debit Card
+</div>
 
-<label>Email</label>
-<input type="email" placeholder="email@example.com">
+<h3>Delivery Option</h3>
+<div class="option">
+  <input type="radio" name="delivery" value="Standard Delivery (3-5 days)" checked> Standard Delivery (3–5 days)
+</div>
+<div class="option">
+  <input type="radio" name="delivery" value="Express Delivery (1-2 days)"> Express Delivery (1–2 days)
+</div>
 
-<label>Password</label>
-<input type="password" placeholder="Password">
+<button class="confirm-btn" onclick="confirmOrder()">Confirm Order</button>
 
-<label>Confirm Password</label>
-<input type="password" placeholder="Confirm Password">
-
-<label>Mobile Number</label>
-<input type="text" placeholder="09XX-XXX-XXXX">
-
-<label>Home Address</label>
-<textarea placeholder="Home address"></textarea>
-
-<button type="submit">Sign Up</button>
-</form>
-
-<p>Already have an account? <a href="login.html">Back to Login</a></p>
+</div>
 </main>
-
 </div>
 
 <footer class="footer">
 <p>© 2026 Vinyl Haven</p>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
