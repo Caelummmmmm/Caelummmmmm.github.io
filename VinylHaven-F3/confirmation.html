@@ -50,38 +50,5 @@
 <p>© 2026 Vinyl Haven</p>
 </footer>
 
-<script>
-// Single JavaScript feature using ES2025: optional chaining & nullish coalescing
-function loadReceipt() {
-  // Placeholder data for demonstration
-  const data = {
-    cart: [
-      { name: "Ariana Grande – Eternal Sunshine", price: 2300 },
-      { name: "Laufey – Bewitched", price: 2100 }
-    ],
-    paymentMethod: "Cash on Delivery",
-    deliveryMethod: null // intentionally null to test ?? operator
-  };
-
-  const itemsList = document.getElementById("items-list");
-  let total = 0;
-
-  // Optional chaining ?. ensures no error if cart is undefined
-  data.cart?.forEach(item => {
-    // Nullish coalescing ?? provides default value if price is null/undefined
-    total += item.price ?? 0;
-
-    const li = document.createElement("li");
-    li.textContent = `${item.name} - ₱${item.price ?? "N/A"}`;
-    itemsList.appendChild(li);
-  });
-
-  // Update total, payment, and delivery safely
-  document.getElementById("total-price").textContent = total ?? 0;
-  document.getElementById("payment-method").textContent = data.paymentMethod ?? "Not selected";
-  document.getElementById("delivery-method").textContent = data.deliveryMethod ?? "Standard Delivery";
-}
-</script>
-
 </body>
 </html>
