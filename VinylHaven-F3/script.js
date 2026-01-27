@@ -1,25 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-const form = document.querySelector('.contact-form');
-if (form) {
-form.addEventListener('submit', e => {
-e.preventDefault();
-alert('This is a placeholder. No backend yet.');
+  const form = document.querySelector('.contact-form');
+  if (form) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('This is a placeholder. No backend yet.');
+    });
+  }
+
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const title = card.querySelector('h3');
+      if (title) alert(title.textContent);
+    });
+  });
+
 });
+
+function checkout(event) {
+  if(event){
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  window.location.href = "payment.html";
 }
 
-const cards = document.querySelectorAll('.card');
-cards.forEach(card => {
-card.addEventListener('click', () => {
-alert(card.querySelector('h3').textContent);
-});
-});
-
-});
-
-function checkout() {
-    alert("Checkout succcess");
-}
 function loadReceipt() {
   const data = {
     cart: [
@@ -31,16 +37,25 @@ function loadReceipt() {
   };
 
   const itemsList = document.getElementById("items-list");
+  if(!itemsList) return;
+
   let total = 0;
 
-  data.cart?.forEach(item => { 
-    total += item.price ?? 0; 
+  data.cart.forEach(item => {
+    total += item.price || 0;
     const li = document.createElement("li");
-    li.textContent = `${item.name} - ₱${item.price ?? "N/A"}`;
+    li.textContent = `${item.name} - ₱${item.price}`;
     itemsList.appendChild(li);
   });
 
-  document.getElementById("total-price").textContent = total ?? 0;
-  document.getElementById("payment-method").textContent = data.paymentMethod ?? "Not selected";
-  document.getElementById("delivery-method").textContent = data.deliveryMethod ?? "Standard Delivery";
+  document.getElementById("total-price").textContent = total;
+  document.getElementById("payment-method").textContent = data.paymentMethod || "Not selected";
+  document.getElementById("delivery-method").textContent = data.deliveryMethod || "Standard Delivery";
+}
+function confirmOrder(event) {
+  if(event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  window.location.href = "confirmation.html";
 }
