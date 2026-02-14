@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinyl Haven | Music Store</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>[v-cloak] { display: none; }</style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <header class="header">
+            <img src="https://static.vecteezy.com/system/resources/previews/010/627/439/non_2x/vinyl-disk-record-music-logo-icon-vinyl-logo-art-icons-and-graphics-vector.jpg" class="logo">
+            <h1>Vinyl Haven</h1>
+        </header>
+
+        <div class="container">
+            <nav class="sidebar">
+                <a v-for="page in menu" :key="page.id" href="#" 
+                   :class="{active: currentView === page.id}" 
+                   @click.prevent="currentView = page.id">
+                   {{ page.name }}
+                </a>
+            </nav>
+
+            <main class="content">
+                <div v-if="currentView === 'home'">
+                    <h2>Featured Album</h2>
+                    <div class="products">
+                        <div class="card" v-for="album in featured" @click="alertTitle(album.title)">
+                            <img :src="album.img" :alt="album.title">
+                            <h3>{{ album.title }}</h3>
+                            <p class="price">₱{{ album.price.toLocaleString() }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="currentView === 'product'">
+                    <h1 class="catalog-title">Artist Catalog</h1>
+                    <div v-for="(albums, artist) in catalog" :key="artist" class="artist-section">
+                        <h2 class="artist-name">{{ artist }}</h2>
+                        <div class="products">
+                            <div class="card" v-for="album in albums" @click="alertTitle(album.title)">
+                                <img :src="album.img" :alt="album.title">
+                                <h3>{{ album.title }}</h3>
+                                <p class="price">₱{{ album.price.toLocaleString() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="currentView === 'cart'" class="centered-view">
+                    <div class="cart-box">
+                        <h2>Your Cart</h2>
+                        <div v-for="(item, index) in cart" :key="index" class="cart-item">
+                            <span>{{ item.name }}</span>
+                            <span>₱{{ item.price.toLocaleString() }}</span>
+                        </div>
+                        <div class="total"><strong>Total:</strong> ₱{{ cartTotal.toLocaleString() }}</div>
+                        <button class="checkout-btn" @click="currentView = 'payment'">Checkout</button>
+                    </div>
+                </div>
+
+                <div v-if="currentView === 'payment'" class="centered-view">
+                    <div class="payment-box">
+                        <h2>Payment & Delivery</h2>
+                        <h3>Payment Method</h3>
+                        <div class="option" v-for="method in ['Cash on Delivery', 'GCash', 'Credit/Debit Card']">
+                            <input type="radio" :value="method" v-model="order.payment"> {{ method }}
+                        </div>
+                        <h3>Delivery Option</h3>
+                        <div class="option" v-for="opt in ['Standard Delivery (3-5 days)', 'Express Delivery (1-2 days)']">
+                            <input type="radio" :value="opt" v-model="order.delivery"> {{ opt }}
+                        </div>
+                        <button class="confirm-btn" @click="currentView = 'confirmation'">Confirm Order</button>
+                    </div>
+                </div>
+
+                <div v-if="currentView === 'confirmation'" class="centered-view">
+                    <div class="confirm-box">
+                        <h2>Order Confirmed</h2>
+                        <p>Thank you for your purchase!</p>
+                        <p><strong>Order Number:</strong> VH-2026-{{ Math.floor(Math.random()*1000) }}</p>
+                        <p><strong>Payment:</strong> {{ order.payment }}</p>
+                        <p><strong>Total Paid:</strong> ₱{{ cartTotal.toLocaleString() }}</p>
+                        <a href="#" class="home-link" @click.prevent="currentView = 'home'">Back to Home</a>
+                    </div>
+                </div>
+
+                <div v-if="currentView === 'about'" class="about-section">
+                    <div class="info-card">
+                        <h2>About the Company</h2>
+                        <p>Vinyl Haven is an online album store specializing in modern pop and indie records.</p>
+                        <hr>
+                        <h2>Owner Profile</h2>
+                        <p><strong>Name:</strong> Gil Roan L. Faminialaghao</p>
+                        <p><strong>Role:</strong> Founder & Developer</p>
+                    </div>
+                </div>
+
+                <div v-if="currentView === 'profile'" class="centered-view">
+                    <div class="info-card profile-card">
+                        <div class="avatar">sophie</div>
+                        <h2>User Profile</h2>
+                        <div class="info-row"><label>Name</label><p>Sophie Prime</p></div>
+                        <div class="info-row"><label>Email</label><p>ihyukonian@gmail.com</p></div>
+                        <div class="info-row"><label>Address</label><p>Sikret</p></div>
+                        <button class="auth-btn" style="margin-top:20px" @click="currentView = 'home'">Logout</button>
+                    </div>
+                </div>
+
+                <div v-if="['contact', 'login', 'signup'].includes(currentView)" class="auth-container">
+                    <div class="auth-card">
+                        <div v-if="currentView === 'contact'">
+                            <h2>Contact Us</h2>
+                            <form @submit.prevent="mockSubmit">
+                                <div class="input-group">
+                                    <label>Name</label>
+                                    <input type="text" placeholder="Your name" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Message</label>
+                                    <textarea placeholder="How can we help?" required></textarea>
+                                </div>
+                                <button type="submit" class="auth-btn">Send Message</button>
+                            </form>
+                        </div>
+
+                        <div v-if="currentView === 'login'">
+                            <h2>Welcome Back</h2>
+                            <form @submit.prevent="mockSubmit">
+                                <div class="input-group">
+                                    <label>Email</label>
+                                    <input type="email" placeholder="hello@musiclover.com" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Password</label>
+                                    <input type="password" placeholder="••••••••" required>
+                                </div>
+                                <button type="submit" class="auth-btn">Login</button>
+                            </form>
+                            <p class="auth-footer">No account? <a href="#" @click.prevent="currentView = 'signup'">Sign up</a></p>
+                        </div>
+
+                        <div v-if="currentView === 'signup'">
+                            <h2>Join the Club</h2>
+                            <form @submit.prevent="mockSubmit1">
+                                <div class="input-group">
+                                    <label>Full Name</label>
+                                    <input type="text" placeholder="username" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Email</label>
+                                    <input type="email" placeholder="name@example.com" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Password</label>
+                                    <input type="password" placeholder="*******" required>
+                                </div>
+                                <button type="submit" class="auth-btn">Create Account</button>
+                            </form>
+                            <p class="auth-footer">Member? <a href="#" @click.prevent="currentView = 'login'">Login</a></p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <footer class="footer">
+            <p>© 2026 Vinyl Haven. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
